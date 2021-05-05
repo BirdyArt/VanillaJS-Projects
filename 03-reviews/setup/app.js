@@ -1,4 +1,3 @@
-// local reviews data
 const reviews = [
   {
     id: 1,
@@ -37,3 +36,43 @@ const reviews = [
       "Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ",
   },
 ];
+
+const img = document.getElementById('person-img');
+const randomBtn = document.querySelector('.random-btn');
+const nextBtn = document.querySelector('.next-btn');
+const prevBtn = document.querySelector('.prev-btn');
+const author = document.getElementById('author');
+const job = document.getElementById('job');
+const info = document.getElementById('info');
+
+let current = 0;
+
+const randomNumber = () => {
+  return Math.floor(Math.random() * 4);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateReview(current);
+});
+
+const updateReview = (current) => {
+  author.textContent = reviews[current].name;
+  img.src = reviews[current].img;
+  job.textContent = reviews[current].job;
+  info.textContent = reviews[current].text;
+};
+
+randomBtn.addEventListener('click', () =>{
+  current = randomNumber();
+  updateReview(current);
+});
+
+nextBtn.addEventListener('click', () =>{
+  current === 3 ? current = 0 : current++;
+  updateReview(current);
+});
+
+prevBtn.addEventListener('click', () =>{
+  current === 0 ? current = 3 : current--;
+  updateReview(current);
+});
