@@ -71,4 +71,48 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "bison steak",
+    category: "dinner",
+    price: 22.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
+
+const list = document.querySelector('.section-center');
+const searchBtns = document.querySelectorAll('.filter-btn');
+
+let searchTerm = "all";
+
+document.addEventListener('DOMContentLoaded' ,() => {
+  display(searchTerm);
+})
+
+searchBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    searchTerm = btn.textContent;
+    display(searchTerm);
+  })
+})
+
+const display = (searchTerm) => {
+  let filteredMenu = menu.filter(item => searchTerm.toLowerCase() === "all" ? item.category !== searchTerm.toLowerCase() : item.category === searchTerm.toLowerCase());
+  list.innerHTML = filteredMenu.map((item) =>
+   `<article class="menu-item">
+          <img src=${item.img} alt=${item.title} class="photo" />
+          <div class="item-info">
+            <header>
+              <h4>${item.title}</h4>
+              <h4 class="price">$${item.price}</h4>
+            </header>
+            <p class="item-text">
+              ${item.desc}
+            </p>
+          </div>
+        </article>`
+  ).join('')
+}
+
+
